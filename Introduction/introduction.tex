@@ -1,0 +1,63 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+% THESIS INTRODUCTION
+
+\chapter*{Introduction}
+\label{chap:introduction}
+\ifpdf
+    \graphicspath{{Introduction/Figures/PNG/}{Introduction/Figures/PDF/}{Introduction/Figures/}}
+\else
+    \graphicspath{{Introduction/Figures/EPS/}{Introduction/Figures/}}
+\fi
+
+% quote
+
+%\setlength{\epigraphwidth}{.35\textwidth}
+%\epigraph{Research is formalized curiosity.}{ Zora Neale Hurston, 1942}
+
+% examples of sections
+
+\section{Motivations}
+\label{motivations}
+In recent years, Internet Of Things technologies (IoT) have grown in
+importance and are expected to have an exponential increase in their
+use in the coming years. For this reason, there is a need for
+communication protocols with two key features, which are:
+- Long range communications
+- Low power consumption.
+To cover these needs LPWANs (Low Power Wide Area Networks) were
+created and offer big advantages when compared to high bitrate and
+shorter range technologies such as Wi-Fi or Bluetooth, and cellular ones
+like GSM or 4G that have a much higher power consumption.\\
+The study of these technologies on the enviroment of tightly packed 
+cities is highly important in order to advance to achive smart cities.
+  
+\section{Context of the Study}
+\label{context}
+The study is performed on the city of Genova, thightly packed with 
+buildings, for the most part made with concrete and brick. Other 
+cities with different architecture could perform different as the 
+distribution of the buildings is important in the reach of the 
+signal. One example of this is the problems with GPS localization 
+when near skyscrapers.
+
+\section{Objectives and Contributions}
+\label{objectives}
+For the storage and analysis of these messages The Things Network is
+being used, which is a free to use LoRa network that offers not only
+gateways but also data storage and various functionalities for a
+particular network, being able to make it private or public.
+
+\section{Overview of the Thesis}
+\label{overview}
+In this thesis we are going to take a look at LoRaWAN (Long Range
+Wide Area Network), a communication protocol with a low bit rate and
+power consumption that can reach distances of up to several kilometres,
+we will study the characteristics of the communication and recreate
+various real life scenarios to study different characteristics such as
+packet loss, power transmitted and the best configuration for the end-
+devices. With these measurements we can obtain valuable information
+about how to optimize the network for its different use cases, as there
+are big differences depending on the topology and placements of the
+nodes and gateways.
