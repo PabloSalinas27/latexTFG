@@ -3,7 +3,7 @@
 %        1         2         3         4         5         6         7         8
 % THESIS CONCLUSIONS
 \def\baselinestretch{1}
-\chapter{Conclusions}
+\chapter{Conclusions and future work}
 \label{chap:conclusions}
 \ifpdf
     \graphicspath{{Conclusions/Figures/PNG/}{Conclusions/Figures/PDF/}{Conclusions/Figures/}}
@@ -13,6 +13,30 @@
 \def\baselinestretch{1.0}
 
 % quote
+\section{First experiment conclusion}
 
-Conclusions should summarize the problem, the solution and its main innovative features, outlining future work on the topic or application scenarios of the proposed solution.
+In the configuration with ADR the ED did not change from SF7. This is problably because 
+we were moving and we didn’t get 20 uplinks a low maximun SNR to increase the SF. We din’t 
+get either 64 uplinks without a confirmation as our maximun packet loss between two uplinks 
+is 35. (All this is expalined in \ref*{chap4:exp1}). In this case the ADR configuration was 
+pointless as the end node wasn´t able to change the parameters like the SF or the power
+to obtain the optimal data transmission. As we got always an spreading factor of 7, the performance 
+during the experiment with this configuration is worse compared with the one we selected with SF10 
+and a fixed Tx power of 14dBm as you can see in \ref*{tab:packet_loss_exp1}. The reason why in \ref*{tab:RSSI_SNR_exp1}
+the values of SNR and RSSI are lower in the case of ADR is because the other configuration is able of detecting 
+signal in worse situationsas we can see in \\
+Thanks to the performance of this experiment we were able to extract 
+valuable information releted with the signal received depending on the landscape of the city. 
+We distinguish two zones, the area of ‘vicolis’ and the port area:
+‘Vicoli’ is an italian word used in the city of Genova for narrow streets. The historic center of Genova 
+is plenty of them making the data transmission almost impossible unless the ED
+is close to the gateway (around 100m but it depends if you have direct vision). Next to this zone is the 
+area of ‘porto-antico’ which is a much more open-space area where the comunnications reach much longer distances.
+The results and graphics shows that the port area showed in the figure (link) is much more 
+suitable for a LoRa comunnication rather than the area of the 'vicolis’.
+
+\section{Second experiment conclusion}
+
+
+
 

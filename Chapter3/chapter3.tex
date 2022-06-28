@@ -3,7 +3,7 @@
 %        1         2         3         4         5         6         7         8
 % THESIS CHAPTER
 
-\chapter{System architecture and implementation}
+\chapter{System architecture and hardware/software used}
 \label{chap:third}
 \ifpdf
     \graphicspath{{Chapter3/Figures/PNG/}{Chapter3/Figures/PDF/}{Chapter3/Figures/}}
@@ -57,15 +57,15 @@ as it is ilustrated in the figure \ref{chap:third:fig:gwconf}:
     \label{chap:third:fig:gwconf}
 \end{figure}
 
-On google maps, with a scale of 20 meters as shown in the image, this 
-is the location. 
+On google maps, with a scale of 20 meters as shown in the image at figure \ref{sec:s-gw:loc}
 
+The gateaway was located in the pinpoint shown in figure \ref{sec:s-gw:loc} 
 \begin{figure}[htbp]
     \includegraphics[width=\linewidth]{mapaloragateway.png}
     \caption{Location of the gateway on the map}
+    \label{sec:s-gw:loc}
 \end{figure}
 
-The gateaway was 
 
 \section{The microcontroller}
 \label{sec:s-micro}
@@ -77,9 +77,9 @@ Arduino Zero) and a quarter of a megabyte of FLASH, with 32k of RAM.
 Thanks to the USB port, and a bootloader, the device can be
 programmed and debugged through the USB port, no need for an
 external programmer, which would have been yet another thin layer of
-complexity. 
+complexity.\\ 
 \begin{figure}[htbp]
-\includegraphics[width=\linewidth]{pinout.png}
+\includegraphics[width=\paperwidth, angle = 90]{pinout.png}
 \caption{The pinout of the module}
 \end{figure}
 More info of the board and the pinout can be found \href{https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts}{here}
@@ -102,12 +102,37 @@ is the one we finally used in order to measure the distance between the node and
         in addition to the other one this sensor is capable of measuring preassure appart of temperature and humidity. 
         \end{itemize} 
         Two of this sensors were used and the respective models are hdc1080 bme280
-    \item[-] Air quality sensor: sensor of the brand \code{SPEC SENSORS} specifically the model \href{https://www.spec-sensors.com/wp-content/uploads/2016/10/ULPSM-IAQ-968-008.pdf}{ULPSM-IAQ}. It measures the indoor air quality   with very low power consumption and the output signal in this case is analog.
-    \item[-] Gps module: the module \href{https://www.u-blox.com/en/product/lea-6-series}{u-block LEA-6S-0-001} is able to obtain the specific coordinates in which the module is placed with a precission of 2.5m and it's also designed for low power consumption.
+    \item[-] Air quality sensor: sensor of the brand \code{SPEC SENSORS} specifically the model
+    \href{https://www.spec-sensors.com/wp-content/uploads/2016/10/ULPSM-IAQ-968-008.pdf}{ULPSM-IAQ}. 
+    It measures the indoor air quality   with very low power consumption and the output signal in this case is analog.
+
 \end{itemize} 
-This sensors are designed for the IoT enviroment as all of them use low power consumption. This characteristic is optimal for the purpose of LoRaWan networks using the less power consumption as possible. 
-\subsection{Libraries used}
-\label{sec:s-m-libra}
+This sensors are designed for the IoT enviroment as all of them use low power consumption. This characteristic is optimal 
+for the purpose of LoRaWan networks using the less power consumption as possible. 
+
+\subsection{GPS module and antenna}
+The module \href{https://www.u-blox.com/en/product/lea-6-series}{u-block LEA-6S-0-001} 
+is able to obtain the specific coordinates in which the module is placed with a precission of 2.5m and 
+it's also designed for low power consumption. \\
+
+This module is designed for the use of passive and active antenna. The antenna selected for this gps module is an 
+active one, which means that the received signal is amplified. The available freaquency bands are the following ones:
+
+\begin{figure}
+    \includegraphics[width = \linewidth]{GPS_frequency_bands.png}
+    \caption{Center frecuency and BW for the three different GPS bands}
+\end{figure}
+
+In our case we will work with 1575 MHz as it is the band that detects our antenna.
+
+
+
+\section{Software used}
+\label{sec:s-m-soft}
+
+\subsection{MCCI LMIC Arduino library}
+\label{sec:s-m-lmic}
+
 The \code{MCCI\_LoRaWAN\_LMIC} library was the most complete library for
 our purpose. The recommended library by Adafruit has the flaw of not
 being compliant with the TTN standard anymore as it cannot receive
@@ -122,10 +147,12 @@ Using the 4.1.0 version, so it will be the model explained:
 (GPS Click - Breakout Board for u-blox LEA-6s, 2022)
 
 \begin{figure}[htbp]
-\includegraphics[width=\linewidth]{modelLMIC.png}
+\centering
+\includegraphics[width=\paperwidth, angle= 90]{modelLMIC.png}
 \caption{Finite state machine of LMIC library}
+\label{sec:lib-finitestate}
 \end{figure}
-This is the whole finite state machine. The only part a user should be
+In figure \ref{sec:lib-finitestate} is pictured the whole finite state machine. The only part a user should be
 concerned about is the frame data set up, the actions to be taken for
 every event desired to react to with the \code{onEvent()} call-back function
 or \code{LMIC\_registerEventCb()} API function. Both are currently
@@ -148,3 +175,21 @@ The I2C library was used to communicate with the sensors, as a
 dependency of the particular libraries for each one of them.
 \code{ClosedCube\_HDC1080} library was used for the more straightforward
 and the \code{Adafruit\_BME280} was used for the other sensor.
+
+\subsection{TinyGPSPlus}
+\label{sec:s-m-tinygps}
+This library is design to parse all type of NMEA data that the GPS module provides. In our case this 
+library is used in order to extract the exact latitude and longitude of the ED. More info about this 
+library can be found in the \href{https://github.com/mikalhart/TinyGPSPlus}{github repository}
+
+\subsection{U-center}
+\label{sec:s-m-ucenter}
+The software developed by the company u-block is a monitoring system for the gps module mentioned before. 
+U-center provides info about the signal that gps is detecting from the gps-satellites. Once the gps is 
+calibrated the u-center software provides all data the gps is collecting including the longtude and latitude.
+
+\subsection{Arduino}
+\label{sec:s-m-lmic}
+
+\subsection{Python}
+\

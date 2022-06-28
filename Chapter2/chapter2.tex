@@ -21,6 +21,21 @@
 % In particular, this chapter describes the design adopted by this research to achieve the aims and objectives stated in the Introduction.
 There have been studies conducted previously that aim to analyze parameters of lora communications in various enviroments, 
 in this section we will see how they relate to our work and measurement results.\\
-The authors in [tfg robin frankson] 
+
+In the paper \cite{kousias2019empirical} the performance of ADR in a scenario in which the end nodes aren’t fixed is analized. 
+The ED were following three different routes inside a truck with different speed. The authors found 
+that as the mobility increase, the performance of the ADR starts to decrease leaving space for 
+further improvements in the LoRaWan adaptative data rate.\\
+
+The idea of paper \cite{benkahla2019enhanced} is to improve the ADR system used in LoRaWan and TTN for mobile ED. The E-ADR (enhanced ADR) 
+they propose is based on transmit messages with the shortest possible time interval between them and to assume the 
+trajectory of the mobile end-node. The results are impressive as they achieve to reduce the ToA and the energy 
+consumption of the ED in the scenarios that are proposed. As a consequence, the packet loss is also reduced or 
+eliminated because the achieved ToA minimizes the use of the allowed time limited by the duty cycle.\\
+
+The authors in \cite{fargas2017gps} develop a system of geolocalization apart of gps or gsm based on the distance between the ED 
+and the different gateways that is connected. They have reached an accuracy of 100m proving two different algorithms but it’s only a firs 
+aproach as this method can’t be applied in real scenarios.
+
 
 \label{sec:sa-temp}

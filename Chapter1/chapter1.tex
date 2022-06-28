@@ -20,11 +20,11 @@ equipped devices to communicate more efficiently and over longer
 distances. This emergent technology had the goal of finding a better
 data transmission protocol than other technologies such as Bluetooth,
 Wi-Fi or 3G/4G. The low-power consumption and the long range
-transmission that this technology offers positions It as a cost-effective
+transmission that this technology offers, positions it as a cost-effective
 solution when compared with the other big technologies. As LPWAN is
 not concerned with transmitting big quantities of data, it offers aspects
 that simply others can't complete such as the coverage of long distances
-as it can appreciate in the figure below.
+as it can be appreciated in the figure below.
 \begin{figure}[htbp]
 \includegraphics[width=\linewidth]{rangevsband.png}
 \caption{Graph comparison of range and bandwidth for different data transmission technologies.}
@@ -38,21 +38,45 @@ data networks, which requires low data rate but constant data streams
 and the coverage of long distances with the benefit of using significantly
 less power than other data network platforms. Shanghai is a perfect
 example of a Smart City where LPWAN is used in order to connect
-thousands of sensors to measure the air quality and human movement.
+thousands of sensors to measure the air quality and human movement, more info 
+\href{https://www.citiesforum.org/news/what-made-shanghai-the-worlds-no-1-smart-city}{here}.
 The future of this technology is bright as IoT devices are growing a 12\%
-annually according to a IHS Markit report (LINK) and LPWAN is one of
-the greatest spaces in the IoT ecosystem. LoRa and LoRaWAN are
+annually according to a \href{https://cdn.ihs.com/www/pdf/IoT_ebook.pdf}{IHS Markit report}.
+and LPWAN is one of the greatest spaces in the IoT ecosystem. LoRa and LoRaWAN are
 realizations of the Low Power WAN concept, and with such high demand
 for the technology both are having great impulse in their development.
 \section{LoRa}
 \label{sec:f-lora}
 LoRa is the protocol which defines the physical (radio) layer of the
-communications in TTN (“The Things Network”). This protocol fixes the
+communications in TTN. This protocol fixes the
 frequency band and defines the modulation that is used to transmit data
 which enables the long-range communication link.\\
 The frequency band depends on the region in which you are, for
 example, in the US they use a band from 902.3 to 914.9 MHz, here in
-Europe the band goes from 863 to 870 MHz.\\
+Europe the band goes from 863 to 870 MHz as it's ilustrated on the next table:\\
+
+\begin{table}[htbp]
+\centering
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{ |p{5cm}|p{5cm}| }
+\hline
+\multicolumn{2}{|c|}{\cellcolor[HTML]{85C1E9}Frequency band depending on the region } \\
+\hline
+\cellcolor[HTML]{AED6F1} Region & \cellcolor[HTML]{AED6F1} Frequency (Mhz) \\
+\hline
+Asia & 433  \\
+Europe & 863-870 \\
+US & 902-928 \\
+Australia & 915-918  \\
+Canada & 779-787  \\
+China & 470-510  \\
+\hline
+\end{tabular}
+\caption{frequency band of different regions}
+\end{table}
+
 The LoRa modulation is based on the Spread Spectrum technique and
 it's crucial for the long distance communication. This technique spreads
 the signal all over the frequency band and it allows LoRa to be very
@@ -89,8 +113,8 @@ Here in Europe we must comply the following rules:
     \item For downlink, the maximum transmission power is limited to 0.5W
 (27dBm)
     \item There is between an 0.1\% and 1\% duty cycle per day. This means
-that the time on air of the transmission must not exceed a
-proportion of the total time.
+            that the time on air of the transmission must not exceed a
+            proportion of the total time.
     \item Maximum allowed antenna gain +2.15 dBi
 \end{itemize}
 \section{TTN and LoRaWAN}
@@ -118,7 +142,58 @@ In LoRaWAN communications we distinguish two types of transmissions
 depending on the sense of communication. An uplink message is sent
 from an end-node to a network server and in the case of a downlink
 message the message in sent from a network server to a specific device.
-In addition three device classes are defined in LoRaWAN:
+
+\begin{itemize}
+    \item \textbf{Uplink message:} this message uses the 
+    LoRa radio packet explicit mode, which consists of a physical 
+    header (PHDR) and a cyclic redundancy check (CRC) header (PHDR-CRC). 
+    Another CRC is required to protect the integrity of the payload; all of
+    them are together inserted by the radio transciver in the following way:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|c|c| } 
+     \hline
+     Preamble & PHDR & PHDR-CRC & PHYPayload & CRC\\ 
+     \hline
+    \end{tabular}
+    \captionof{table}{Uplink message format.}
+    \end{center}
+    
+    \item \textbf{Downlink message:} The structure is very similar to the uplink message, the only difference is that in a downlink message there is no existence of CRC:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|c| } 
+     \hline
+     Preamble & PHDR & PHDR-CRC & PHYPayload \\ 
+     \hline
+    \end{tabular}
+    \captionof{table}{Downlink message format.}
+    \end{center}
+\end{itemize}
+    
+This PHYPayload that both, the uplink and the downlink messages contains, starts with a single-octet MAC header (MHDR), followed by a MAC payload (MACPayload) and finishing with a 4-octet message
+integrity code (MIC):
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+    \hline
+    MHDR & MACPayload & MIC \\ 
+    \hline
+\end{tabular}
+\captionof{table}{PHYPayload}
+\end{center}
+
+The MHDR defines the type of the message that is sent. Those types are join request, join accept, unconfirmed data up/down and confirmed data up/down, where confirmed means that it has to be acknowledged by the receiver, while unconfirmed does not require that.
+
+The MACPayload contains a frame header (FHDR), which is the device address of an end-device (DevAddr), followed by an optional port field (FPort) and an optional frame payload field (FRMPayload):
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+    \hline
+    FHDR (DevAdd) & FPort & FRMPayload \\ 
+    \hline
+\end{tabular}
+\captionof{table}{MACPayload}
+\end{center}
+
+Three device classes are defined in LoRaWAN:
 \begin{itemize}
     \item Class A: in this class after the uplink transmission two reception
 windows are set in order to receive downlink messages. A stands
@@ -149,6 +224,16 @@ Things Network allows to disable or enable it depending on your
 purpose. If the device is stationary, TTN recommends to leave the ADR
 active, but if the end node is supposed to move, the SF and power
 should be in charge of the programmer.\\
+The ADR algorithm is simple, but has important ramifications on 
+the performance if the device is not stationary.
+The reason for this is that the ADR algorithm was designed in order
+to provide the best bandwidth utilization and the best battery life
+to devices with an stable radio communication. From this falls that 
+a moving end node is not the optimal target for the algorithm. Nevertheless, 
+the effects of it are easy enough to analize. 
+Currently The Things Stack takes the 20 most recent uplinks, 
+starting at the moment the ADR bit is set. 
+
 For any LPWAN technology it's crucial to incorporate security.
 LoRaWAN uses two layers of security: one for the network layer and
 another one for the application layer. The network security layer ensure
