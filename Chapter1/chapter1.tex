@@ -231,8 +231,45 @@ to provide the best bandwidth utilization and the best battery life
 to devices with an stable radio communication. From this falls that 
 a moving end node is not the optimal target for the algorithm. Nevertheless, 
 the effects of it are easy enough to analize. 
-Currently The Things Stack takes the 20 most recent uplinks, 
-starting at the moment the ADR bit is set. 
+Currently The Things Stack takes the 20 most recent uplinks 
+to compute the new parameters of the transmission.
+This is the current outline of the behaviour of the TTN as of now:
+\begin{itemize}
+    \item If the ADR bit is not set, the TTN doesn't do anything.
+    \item If is set, RF parameters are stored
+    \item After 20 packets, the algorithm is executed, and if the 
+    parameters are not optimal or the ADRAckReq bit is true, a downlink is 
+    scheduled with the correct parameters. The bit is set to true usually
+    every 64 packets without downlink, but it is up to the device.
+    \item If the ADR failed, the packet is sent again
+\end{itemize}
+Figure \ref{chap1:adr} helps  visualizing the behaviour:\\
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width = \linewidth]{adr.png}
+    \caption{Diagram outlines of the ADR flow in The Things Stack. More \href{https://www.thethingsnetwork.org/docs/lorawan/adaptive-data-rate/}{here}}
+    \label{chap1:adr}
+\end{figure}
+\\
+The ADR algorithm is the following:
+\[
+SNR_{margin} = SNR_{max} - SNR_{DR3} - margin_{dB}
+\]
+And with the SNRmargin we compute the steps up or down on DR/SF:
+\[
+Steps Up Or Down = \lfloor\frac{SNR_{margin}}{2.5}\rfloor
+\]
+As we take the maximum of the SNR of the past 20 packets, the 
+performance of this algorithm is tuned for stationary nodes.
+The TTN recommends the end node to have a fixed power and DR if the 
+end node is movile. The obvious and worst case scenario where this algorithm would fail 
+to give correct estimates is the one where the end node is moving away from 
+the gateway. The first packet would be the maximum SNR, so the algorithm can not 
+account for the decreasing SNR over the course of the next 19 received packets, 
+resulting in a lower SF than what it would be needed in order to receive correctly 
+in the future.\\
+
+
 
 For any LPWAN technology it's crucial to incorporate security.
 LoRaWAN uses two layers of security: one for the network layer and
