@@ -2,7 +2,7 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 % THESIS Chapter
-\chapter{Simulation and data analysis}
+\chapter{"Raw" data for first and second experiments}
 \label{chap:fifth}
 \ifpdf
     \graphicspath{{Chapter5/Figures/PNG/}{Chapter5/Figures/PDF/}{Chapter5/Figures/}}
@@ -10,43 +10,31 @@
     \graphicspath{{Chapter5/Figures/EPS/}{Chapter5/Figures/}}
 \fi
 
-\section{Results for the first experiment}
-
+In this section the graphs are displayed, whereas in \ref{chap:conclusions} this will be 
+explained. For the second experiment the parsed json structure was used to simplify the 
+representation of the data with python.
+\section{Results of the first experiment}
+The tables for losses on the first experiment are included, but for the second, the tables are on 
+ chapter \ref{chap:conclusions} \\
 \begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{Figure_1.png}
-    \caption{Acummulative packet loss with ADR depending on the time the packets arrived}
+
+    \includegraphics[width=\linewidth]{losses.png}
+    \caption{Acummulative packet loss depending on the time the packets arrived}
     \label{chap:fifth:fig:1}
 \end{figure}
 
 \begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{Figure_1NoADR.png}
-    \caption{Acummulative packet loss without ADR depending on the time the packets arrived}
-    \label{chap:fifth:fig:1:noADR}
+    \includegraphics[width=\linewidth]{lossesderivadas.png}
+    \caption{The discrete derivative of \ref{chap:fifth:fig:1}}
+    \label{chap:fifth:fig:3:noADR}
 \end{figure}
 
 \begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{Figure_2.png}
-    \caption{RSSI with ADR config. depending on the time}
+    \includegraphics[width=\linewidth]{RSSI.png}
+    \caption{RSSI depending on the time}
     \label{chap:fifth:fig:2}
 \end{figure}
 
-\begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{Figure_2NoADR.png}
-    \caption{RSSI without ADR config. depending on the time}
-    \label{chap:fifth:fig:2:noADR}
-\end{figure}
-
-\begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{Figure_3.png}
-    \caption{SNR with ADR config. depending on the time}
-    \label{chap:fifth:fig:3}
-\end{figure}
-
-\begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{Figure_3NoADR.png}
-    \caption{SNR without ADR config. depending on the time}
-    \label{chap:fifth:fig:3:noADR}
-\end{figure}
 
 
 \begin{table}[htpb]
@@ -80,5 +68,32 @@
          \hline
     \end{tabular}
     \caption{Table comparing the medium RSSI and SNR in both cases}
-    \label{tab:RSSI_SNR_ex}
+    \label{tab:RSSI_SNR_exp1}
 \end{table}
+
+
+\section{Results of the second experiment}
+
+Our parsed package structure is the following:
+
+\begin{minted}{json}
+    {
+        "powRet": 17,
+        "f_port": 42,
+        "f_cnt": 51,
+        "rssi": -112,
+        "rssi_ch": -112,
+        "snr": 4.8,
+        "bw": 125000,
+        "SF": 7,
+        "f(MHz)": 867.5,
+        "time": "2022-06-27T18:21:17.366640+00:00",
+        "lat": 44.4134407043457,
+        "lng": 8.928983688354492
+    }
+\end{minted}
+This was downloaded and parsed from the storage integration The Things Network provides.
+It is suitable for us, since we do not need instant feedback, for that we would have to 
+set up a webhook on an external server. The date is on ISO format. 
+From here we parse the graphs depicted on chapter \ref{chap:conclusions}.
+
