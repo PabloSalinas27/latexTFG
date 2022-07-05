@@ -2,7 +2,7 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 % THESIS Chapter
-\chapter{"Raw" data for first and second experiments}
+\chapter{Data analysis for first and second experiments}
 \label{chap:fifth}
 \ifpdf
     \graphicspath{{Chapter5/Figures/PNG/}{Chapter5/Figures/PDF/}{Chapter5/Figures/}}
@@ -14,6 +14,24 @@ In this section the graphs are displayed, whereas in \ref{chap:conclusions} this
 explained. For the second experiment the parsed json structure was used to simplify the 
 representation of the data with python.
 \section{Results of the first experiment}
+The packet structure for the first experiment is as follows:
+
+\begin{minted}{json}
+    {
+        "powRet": 17,
+        "f_port": 42,
+        "f_cnt": 51,
+        "rssi": -90,
+        "rssi_ch": -90,
+        "snr": 4.8,
+        "bw": 125000,
+        "SF": 7,
+        "f(MHz)": 867.5,
+        "time": "YYY-MM-DDTHH:mm:ss.ssssss+HH:mm",
+    }
+\end{minted}
+
+
 The tables for losses on the first experiment are included, but for the second, the tables are on 
  chapter \ref{chap:conclusions} \\
 \begin{figure}[htbp]
@@ -87,7 +105,7 @@ Our parsed package structure is the following:
         "bw": 125000,
         "SF": 7,
         "f(MHz)": 867.5,
-        "time": "2022-06-27T18:21:17.366640+00:00",
+        "time": "YYY-MM-DDTHH:mm:ss.ssssss+HH:mm",
         "lat": 44.4134407043457,
         "lng": 8.928983688354492
     }
