@@ -25,8 +25,8 @@ during the experiment with this configuration is worse compared with the one we 
 and a fixed Tx power of 14dBm as you can see in \ref{tab:packet_loss_exp1}. The reason why in 
 \ref{tab:RSSI_SNR_exp1}
 the values of SNR and RSSI are lower in the case of ADR is because the other configuration 
-is able of detecting 
-signal in worse situationsas we can see in \\
+is able to detect
+signal in worse situations, leading to lower RSSI values. \\
 Thanks to the performance of this experiment we were able to extract 
 valuable information releted with the signal received depending on the landscape of the city. 
 We distinguish two zones, the area of "vicolis" and the port area:
@@ -36,7 +36,11 @@ is close to the gateway (around 100m but it depends if you have direct vision). 
 area of "porto-antico" which is a much more open-space area where the comunnications reach much longer distances.
 The results and graphics shows that the port area showed in the figure (link) is much more 
 suitable for a LoRa comunnication rather than the area of the "vicolis".
-
+In the figure \vref{conc:areasGenova} the different zones of the route that we detected are drawn with different colors. 
+The green circle is the area near the gateaway and despite it was inside the most dense area, 
+almost all packets were able to arrive. Two more areas were defined as we were moving away from the 
+gateway, the blue area where the connection was stable (some packets were lost but not most of them) 
+and the red zone in which the gateway was not collecting any info from the end-node.
 \section{Second experiment conclusion}
 For this second experiment the objective was to further expand on the results that we obtained on the previous one, where we concluded that the packet loss increased exponentially when the device was on a highly building dense area.
 After receiving the packets with their locations, we separated, as in figure \vref{chap:conc-div}the map into two regions:
@@ -45,35 +49,19 @@ After receiving the packets with their locations, we separated, as in figure \vr
     \item  the upper area where dense buildings can interfere with the signal
 \end{itemize}
 
-\begin{figure}[htpb]
-\centering    
-\includegraphics[width=\linewidth]{dividedGenova.png}
-\caption{Separation line used}
-\label{chap:conc-div}
-\end{figure}
+
 
 This information also allowed us to extract the path followed and know if there had been any losses between the points received.
 With that information the map on figure \vref{chap:conc-colpath} map was created:
 
-\begin{figure}[htpb]
-\centering    
-\includegraphics[width=\linewidth]{coloredPath.png}
-\caption{Path taken colored by the losses}
-\label{chap:conc-colpath}
-\end{figure}
-In this map the points are connected by lines. A red line between two points indicates that some packets were lost between them. The width of the line indicates the amount of packets lost,  wider lines indicating  bigger losses. 
+
+In the map \vref{chap:conc-colpath} the points are connected by lines. A red line between two points indicates that some packets were lost between them. The width of the line indicates the amount of packets lost,  wider lines indicating  bigger losses. 
 A green line indicates the opposite, with wider lines indicating the streak of packages received.
 
 Once the points were separated, we analysed the Received signal strength of the points in both 
-groups obtaining the figure \vref{chap:conc:rssidist}  comparing both.
+groups obtaining the figure \vref{chap:conc:dist}  comparing both.
 
-\begin{figure}[htpb]
-\centering    
-\includegraphics[width=\linewidth]{rssidistancia.png}
-\caption{RSSI in function of the distance}
-\label{chap:conc:rssidist}
-\end{figure}
-Here we can clearly see that the signal strength in very dense urban areas decreases very rapidly and fades near the 200 meter distance whereas 
+We can clearly see that the signal strength in very dense urban areas decreases very rapidly and fades near the 200 meter distance whereas 
 on an open area it maintains stable levels for much longer distances.
 
 
@@ -81,28 +69,14 @@ Another conclusion can be extracted from this data. If we look at the percentage
 transmitted, on open areas the results closely correlate with theory. On the other hand, the data in the urban dense area highlights that 
 these parameters do not have noticeable impact due to the fact that the landscape plays a much more important role.
 \\
-\begin{figure}[htpb]
-\centering    
-\includegraphics[width=\linewidth]{recivedByPower.png}
-\caption{Losses grouped by power}
-\label{conc:recivedPow}
-\end{figure}
-\begin{figure}[htpb]
-\includegraphics[width=\linewidth]{recivedBySpreading.png}
-\caption{Losses gropued by spreading factor}
-\label{conc:recivedSp}
-\end{figure}
-\begin{figure}[htpb]
-\includegraphics[width=\linewidth]{rssiSpreading.png}
-\caption{Mean RSSI grouped by spreading factor}
-\label{conc:rssiSp}
-\end{figure}
+
 
 \section{Final conclusions and future work}
 
-The results of the experiments lead to the conclusion that the most important factor when performing a LoRaWan project inside a complex urban area for mobile ED, is the study of the landscape for the different areas. The less obstacles between the ED and the gateway, the better for our communication.
-Transmission parameters as the SF or the Tx power are useless when the signal is not received by the gateway because of interference caused by buildings and other obstacles for the signal inside a city. This parameters are relevant for a more open space area, the port area in our case, in which they can make the difference regarding the range for our communication.
-The ADR for mobile end nodes where packets are not sent with a high frequency (one per minute) and where the mobile end node is moving with not much speed (walking case) is pointless.
+The results of the experiments lead to the conclusion that the most important factor when performing a LoRaWan project inside a complex urban area for mobile ED, is the study of the landscape for the different areas. 
+The less obstacles between the ED and the gateway, the better for our communication.\\
+Transmission parameters as the SF or the Tx power are useless when the signal is not received by the gateway because of interference caused by buildings and other obstacles for the signal inside a city. This parameters are relevant for a more open space area, the port area in our case, in which they can make the difference regarding the range for our communication.\\
+The ADR for mobile end nodes where packets are not sent with a high frequency (one per minute) and where the mobile end node is moving with not much speed (walking case) is pointless.\\
 Regarding the future, the limitations due to the duty cycle didn't let us collect the data as we wanted. The transmission interval between packets was controlled by the library used and it was impossible to collect a huge amount of data in a short period of time. Being able to control the time between packets would suppose a great improvement for the experimentation. This improvement would lead to a better analysis of  data regarding the SF and the TX power as more packets would be taken into account and also to build new hypothesis such as how this interval can affect the ADR. 
 In order to measure the packet loss depending on distance, a device that collects all the messages the ED is trying to send is needed. By adding this device to the end node, the distance between the ED and the gateway for the packets that doesn't reach the gateway can be calculated. This would suppose a new interesting measure that can be compared depending on the SF and Tx pow in a open space area.
 

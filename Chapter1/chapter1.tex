@@ -48,7 +48,7 @@ for the technology both are having great impulse in their development.
 \section{LoRa}
 \label{sec:f-lora}
 LoRa is the protocol which defines the physical (radio) layer of the
-communications in TTN. This protocol fixes the
+communications in \acrfull{ttn}. This protocol fixes the
 frequency band and defines the modulation that is used to transmit data
 which enables the long-range communication link.\\
 The frequency band depends on the region in which you are, for
@@ -94,7 +94,7 @@ In LoRa communications we are able to reduce our data rate in order to
 gain range by changing the Spreading Factor. The Spreading Factor
 means the number of raw bits that can be encoded in a symbol.
 (“Modelling and Performance Evaluation of LoRa Network Based on
-Capture ...”) The SF value goes from 7 to 12 and as we increase this
+Capture ...”) The \acrfull{sf} value goes from 7 to 12 and as we increase this
 value the number of raw bits in a symbol increase and this leads to a
 gain of range but also to a reduction of data rate, to an incrementation
 of the time on air and to more battery consumption. \\
@@ -214,8 +214,7 @@ bandwidth. During a data transmission the channel is constantly
 changing in order to make the communication more robust to
 interferences.\\
 An important mechanism that is used to control the uplink connection
-between the end node and the gateway is the Adaptative Data Rate
-(ADR). This protocol is able to modify automatically parameters like the
+between the end node and the gateway is the \acrfull{adr}. This protocol is able to modify automatically parameters like the
 Spreading Factor or the transmission power according to the signal
 power that the gateway is receiving. As it's explained before, the SF also
 affects the power used by the node so this mechanism is able to find the
